@@ -14,7 +14,6 @@ source:
 build:
   number: {{ build }}
   string: "{{ cislug }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
-  script: exit 1  # [osx]
 
 requirements:
   host:
