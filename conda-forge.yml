@@ -5,4 +5,7 @@ provider:
   linux_ppc64le: default
 bot:
   automerge: true
+  automerge_options:
+    ignored_statuses:
+      - linter
 conda_forge_output_validation: true
