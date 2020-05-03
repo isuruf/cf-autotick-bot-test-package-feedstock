@@ -5,7 +5,7 @@ bot:
     - linter
 conda_forge_output_validation: true
 provider:
-  linux: circle
+  linux: azure
   linux_aarch64: default
-  osx: circle
+  osx: azure
   win: azure
