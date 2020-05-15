@@ -3,7 +3,7 @@ bot:
   automerge_options:
     ignored_statuses:
     - linter
-conda_forge_output_validation: false
+conda_forge_output_validation: true
 provider:
   linux: azure
   linux_aarch64: default
