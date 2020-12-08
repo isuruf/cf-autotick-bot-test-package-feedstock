@@ -5,6 +5,7 @@
 version: 2
 
 jobs:
+<<<<<<< HEAD
   build_osx_64_python3.6.____cpython:
     working_directory: ~/test
     macos:
@@ -12,9 +13,14 @@ jobs:
     environment:
       - CONFIG: "osx_64_python3.6.____cpython"
       - UPLOAD_PACKAGES: "True"
+=======
+  build:
+    working_directory: ~/test
+    machine: true
+>>>>>>> master
     steps:
-      - checkout
       - run:
+<<<<<<< HEAD
           name: Fast finish outdated PRs and merge PRs
           command: |
             ./.circleci/fast_finish_ci_pr_build.sh
@@ -65,11 +71,23 @@ jobs:
             export CI=circle
             export FEEDSTOCK_NAME=$(basename ${CIRCLE_PROJECT_REPONAME})
             ./.scripts/run_osx_build.sh
+=======
+          # The Circle-CI build should not be active, but if this is not true for some reason, do a fast finish.
+          command: exit 0
+>>>>>>> master
 
 workflows:
   version: 2
   build_and_test:
     jobs:
+<<<<<<< HEAD
       - build_osx_64_python3.6.____cpython
       - build_osx_64_python3.7.____cpython
       - build_osx_64_python3.8.____cpython
+=======
+      - build:
+          filters:
+            branches:
+              ignore:
+                - /.*/
+>>>>>>> master

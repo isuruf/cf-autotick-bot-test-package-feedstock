@@ -13,6 +13,7 @@ Current build status
 ====================
 
 
+<<<<<<< HEAD
 <table><tr>
     <td>CircleCI</td>
     <td>
@@ -42,6 +43,9 @@ Current build status
       </a>
     </td>
   </tr>
+=======
+<table>
+>>>>>>> master
     
   <tr>
     <td>Azure</td>
@@ -55,6 +59,7 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
+<<<<<<< HEAD
               <td>linux_64_python3.6.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=master">
@@ -157,6 +162,12 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=master&jobName=win&configuration=win_64_python3.8.____cpython" alt="variant">
+=======
+              <td>linux_64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=master&jobName=linux&configuration=linux_64_" alt="variant">
+>>>>>>> master
                 </a>
               </td>
             </tr>
@@ -259,6 +270,5 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
-* [@beckermr](https://github.com/beckermr/)
-* [@conda-forge/bot](https://github.com/conda-forge/bot/)
+* [@conda-forge-daemon](https://github.com/conda-forge-daemon/)
 

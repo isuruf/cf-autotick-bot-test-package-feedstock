@@ -1,7 +1,9 @@
 bot:
   automerge: true
 provider:
-  win: appveyor
+  linux: azure
+  linux_aarch64: drone
+  linux_ppc64le: travis
   osx: circle
   linux_aarch64: default
   linux_ppc64le: default
