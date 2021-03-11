@@ -64,13 +64,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Configure binfmt_misc on Linux
-      if: matrix.os == 'ubuntu'
-      shell: bash
-      run: |
-        docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
-        ls /proc/sys/fs/binfmt_misc/
-
     - name: Build on Linux
       if: matrix.os == 'ubuntu'
       env:
@@ -79,11 +72,9 @@ jobs:
         DOCKERIMAGE: ${{ matrix.DOCKERIMAGE }}
         CI: github_actions
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
-        FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
-        STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
       shell: bash
       run: |
-        env
+        docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
         export FEEDSTOCK_NAME="$(basename $GITHUB_REPOSITORY)"
         export GIT_BRANCH="$(basename $GITHUB_REF)"
         ./.scripts/run_docker_build.sh
@@ -95,8 +86,6 @@ jobs:
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
         CI: github_actions
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
-        FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
-        STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
       shell: bash
       run: |
         env
@@ -104,7 +93,7 @@ jobs:
         export GIT_BRANCH="$(basename $GITHUB_REF)"
         ./.scripts/run_osx_build.sh
     
-    - name: Install Miniconda for windows
+    - name: Install Miniforge for windows
       uses: conda-incubator/setup-miniconda@v2
       with:
         miniconda-version: latest
@@ -114,15 +103,14 @@ jobs:
       shell: cmd
       run: |
         call activate base
-        conda install -c conda-forge 'python=3.6' conda-build conda "conda-forge-ci-setup=3" pip
+        conda.exe install -c conda-forge 'python=3.6' conda-build conda "conda-forge-ci-setup=3" pip
         setup_conda_rc .\ ".\recipe" .\.ci_support\%CONFIG%.yaml
         
         conda.exe build "recipe" -m .ci_support\%CONFIG%.yaml
         set "FEEDSTOCK_NAME=%GITHUB_REPOSITORY:*/=%"
         set "GIT_BRANCH=%GITHUB_REF:*/=%"
-        validate_recipe_outputs "%FEEDSTOCK_NAME%"
         if %UPLOAD_PACKAGES% == "True" (
-          upload_package --validate --feedstock-name="%FEEDSTOCK_NAME%" .\ ".\recipe" .ci_support\%CONFIG%.yaml
+          upload_package  .\ ".\recipe" .ci_support\%CONFIG%.yaml
         )
       env:
         PYTHONUNBUFFERED: 1
