@@ -104,40 +104,30 @@ jobs:
         export GIT_BRANCH="$(basename $GITHUB_REF)"
         ./.scripts/run_osx_build.sh
     
-    - name: Install Miniforge for windows
+    - name: Install Miniconda for windows
       uses: conda-incubator/setup-miniconda@v2
       with:
-        miniforge-version: latest
+        miniconda-version: latest
       if: matrix.os == 'windows'
 
     - name: Build on windows
       shell: cmd
       run: |
         call activate base
-        conda install 'python=3.6' conda-build conda "conda-forge-ci-setup=3" pip
+        conda install -c conda-forge 'python=3.6' conda-build conda "conda-forge-ci-setup=3" pip
         setup_conda_rc .\ ".\recipe" .\.ci_support\%CONFIG%.yaml
         
         conda.exe build "recipe" -m .ci_support\%CONFIG%.yaml
-      env:
-        PYTHONUNBUFFERED: 1
-        CONFIG: ${{ matrix.CONFIG }}
-        CI: github_actions
-      if: matrix.os == 'windows'
-
-    - name: Upload on windows
-      shell: cmd
-      run: |
-        call activate base
         set "FEEDSTOCK_NAME=%GITHUB_REPOSITORY:*/=%"
         set "GIT_BRANCH=%GITHUB_REF:*/=%"
         validate_recipe_outputs "%FEEDSTOCK_NAME%"
-        upload_package --validate --feedstock-name="%FEEDSTOCK_NAME%" .\ ".\recipe" .ci_support\%CONFIG%.yaml
+        if %UPLOAD_PACKAGES% == "True" (
+          upload_package --validate --feedstock-name="%FEEDSTOCK_NAME%" .\ ".\recipe" .ci_support\%CONFIG%.yaml
+        )
       env:
         PYTHONUNBUFFERED: 1
         CONFIG: ${{ matrix.CONFIG }}
-        UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
         CI: github_actions
+        UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
-        FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
-        STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
-      if: matrix.os == 'windows' && matrix.UPLOAD_PACKAGES == 'True'
+      if: matrix.os == 'windows'
