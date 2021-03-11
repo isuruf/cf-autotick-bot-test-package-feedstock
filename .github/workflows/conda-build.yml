@@ -58,14 +58,14 @@ jobs:
       if: matrix.os == 'windows'
 
     - name: Configure binfmt_misc on Linux
-      if: matrix.os == "Linux"
+      if: matrix.os == 'linux'
       shell: bash
       run: |
         docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
         ls /proc/sys/fs/binfmt_misc/
 
     - name: Build on Linux
-      if: matrix.os == "linux"
+      if: matrix.os == 'linux'
       env:
         CONFIG: ${{ matrix.CONFIG }}
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
@@ -77,7 +77,7 @@ jobs:
         ./.scripts/run_docker_build.sh
 
     - name: Build on macOS
-      if: matrix.os == "macos"
+      if: matrix.os == 'macos'
       env:
         CONFIG: ${{ matrix.CONFIG }}
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
