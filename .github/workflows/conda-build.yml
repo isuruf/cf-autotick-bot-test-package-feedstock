@@ -33,6 +33,18 @@ jobs:
             UPLOAD_PACKAGES: True
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
             os: ubuntu
+          - CONFIG: win_64_python3.6.____cpython
+            UPLOAD_PACKAGES: True
+            os: windows
+          - CONFIG: win_64_python3.7.____cpython
+            UPLOAD_PACKAGES: True
+            os: windows
+          - CONFIG: win_64_python3.8.____cpython
+            UPLOAD_PACKAGES: True
+            os: windows
+          - CONFIG: win_64_python3.9.____cpython
+            UPLOAD_PACKAGES: True
+            os: windows
           - CONFIG: osx_64_python3.6.____73_pypy
             UPLOAD_PACKAGES: True
             os: macos
@@ -52,20 +64,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - uses: conda-incubator/setup-miniconda@v2
-      with:
-        miniforge-version: latest
-      if: matrix.os == 'windows'
-
     - name: Configure binfmt_misc on Linux
-      if: matrix.os == 'linux'
+      if: matrix.os == 'ubuntu'
       shell: bash
       run: |
         docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
         ls /proc/sys/fs/binfmt_misc/
 
     - name: Build on Linux
-      if: matrix.os == 'linux'
+      if: matrix.os == 'ubuntu'
       env:
         CONFIG: ${{ matrix.CONFIG }}
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
@@ -86,3 +93,28 @@ jobs:
       run: |
         env
         ./.scripts/run_osx_build.sh
+    
+    - name: Install Miniforge for windows
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        miniforge-version: latest
+      if: matrix.os == 'windows'
+
+    - name: Build on windows
+      run: |
+        call activate base
+        conda install 'python=3.6' conda-build conda "conda-forge-ci-setup=3" pip
+        setup_conda_rc .\ ".\recipe" .\.ci_support\%CONFIG%.yaml
+        
+        conda.exe build "recipe" -m .ci_support\%CONFIG%.yaml
+        set "FEEDSTOCK_NAME=%GITHUB_REPOSITORY:*/=%"
+        validate_recipe_outputs "%FEEDSTOCK_NAME%"
+        if %UPLOAD_PACKAGES% == True (
+            upload_package --validate --feedstock-name="%FEEDSTOCK_NAME%" .\ ".\recipe" .ci_support\%CONFIG%.yaml
+        )
+      env:
+        PYTHONUNBUFFERED: 1
+        CONFIG: ${{ matrix.CONFIG }}
+        UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
+        CI: github_actions
+      if: matrix.os == 'windows'
