@@ -88,12 +88,11 @@ jobs:
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
       shell: bash
       run: |
-        env
         export FEEDSTOCK_NAME="$(basename $GITHUB_REPOSITORY)"
         export GIT_BRANCH="$(basename $GITHUB_REF)"
         ./.scripts/run_osx_build.sh
     
-    - name: Install Miniforge for windows
+    - name: Install Miniconda for windows
       uses: conda-incubator/setup-miniconda@v2
       with:
         miniconda-version: latest
