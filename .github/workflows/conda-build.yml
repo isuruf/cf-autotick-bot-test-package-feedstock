@@ -84,6 +84,8 @@ jobs:
       shell: bash
       run: |
         env
+        export FEEDSTOCK_NAME="$(basename $GITHUB_REPOSITORY)"
+        export GIT_BRANCH="$(basename $GITHUB_REF)"
         ./.scripts/run_docker_build.sh
 
     - name: Build on macOS
@@ -98,6 +100,8 @@ jobs:
       shell: bash
       run: |
         env
+        export FEEDSTOCK_NAME="$(basename $GITHUB_REPOSITORY)"
+        export GIT_BRANCH="$(basename $GITHUB_REF)"
         ./.scripts/run_osx_build.sh
     
     - name: Install Miniforge for windows
@@ -107,6 +111,7 @@ jobs:
       if: matrix.os == 'windows'
 
     - name: Build on windows
+      shell: cmd
       run: |
         call activate base
         conda install 'python=3.6' conda-build conda "conda-forge-ci-setup=3" pip
@@ -120,9 +125,11 @@ jobs:
       if: matrix.os == 'windows'
 
     - name: Upload on windows
+      shell: cmd
       run: |
         call activate base
         set "FEEDSTOCK_NAME=%GITHUB_REPOSITORY:*/=%"
+        set "GIT_BRANCH=%GITHUB_REF:*/=%"
         validate_recipe_outputs "%FEEDSTOCK_NAME%"
         upload_package --validate --feedstock-name="%FEEDSTOCK_NAME%" .\ ".\recipe" .ci_support\%CONFIG%.yaml
       env:
