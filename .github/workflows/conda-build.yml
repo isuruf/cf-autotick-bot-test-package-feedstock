@@ -58,11 +58,10 @@ jobs:
       if: matrix.os == 'windows'
 
     - name: Configure binfmt_misc on Linux
-      script: |
+      if: !startsWith(matrix.CONFIG, 'linux_64')
+      run: |
         docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
         ls /proc/sys/fs/binfmt_misc/
-      condition: !startsWith(matrix.CONFIG, 'linux_64')
-      displayName: Configure binfmt_misc
 
     - name: Build on Linux
       if: matrix.os == "linux"
