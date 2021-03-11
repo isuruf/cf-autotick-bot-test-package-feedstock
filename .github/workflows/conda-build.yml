@@ -59,6 +59,7 @@ jobs:
 
     - name: Configure binfmt_misc on Linux
       if: !startsWith(matrix.CONFIG, 'linux_64')
+      shell: bash
       run: |
         docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
         ls /proc/sys/fs/binfmt_misc/
@@ -69,7 +70,8 @@ jobs:
         CONFIG: ${{ matrix.CONFIG }}
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
         DOCKERIMAGE: ${{ matrix.DOCKERIMAGE }}
-        CI: github
+        CI: github_actions
+      shell: bash
       run: |
         env
         ./.scripts/run_docker_build.sh
@@ -79,7 +81,8 @@ jobs:
       env:
         CONFIG: ${{ matrix.CONFIG }}
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
-        CI: github
+        CI: github_actions
+      shell: bash
       run: |
         env
         ./.scripts/run_osx_build.sh
