@@ -45,6 +45,11 @@ platform:
   os: linux
   arch: arm64
 
+clone:
+  git:
+    image: quay.io/isuruf/drone-git
+    depth: 50
+
 steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
