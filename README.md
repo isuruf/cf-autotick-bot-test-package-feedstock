@@ -14,20 +14,6 @@ Current build status
 
 
 <table><tr>
-    <td>CircleCI</td>
-    <td>
-      <a href="https://circleci.com/gh/conda-forge/cf-autotick-bot-test-package-feedstock">
-        <img alt="OSX" src="https://img.shields.io/circleci/project/github/conda-forge/cf-autotick-bot-test-package-feedstock/master.svg?label=OSX">
-      </a>
-    </td>
-  </tr><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://travis-ci.com/conda-forge/cf-autotick-bot-test-package-feedstock">
-        <img alt="macOS" src="https://img.shields.io/travis/com/conda-forge/cf-autotick-bot-test-package-feedstock/master.svg?label=macOS">
-      </a>
-    </td>
-  </tr><tr>
     <td>Drone</td>
     <td>
       <a href="https://cloud.drone.io/conda-forge/cf-autotick-bot-test-package-feedstock">
