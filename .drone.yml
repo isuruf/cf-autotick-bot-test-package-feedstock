@@ -7,8 +7,7 @@ platform:
   arch: ppc64le
 
 clone:
-  image: quay.io/isuruf/drone-git
-  depth: 50
+  disable: true
 
 steps:
 - name: Install and build
