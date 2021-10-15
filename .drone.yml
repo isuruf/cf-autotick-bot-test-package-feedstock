@@ -33,9 +33,6 @@ steps:
     - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
     - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
     - echo "Done building"
-    
-node:
-  platform: linux-ppc64le
 
 ---
 kind: pipeline
