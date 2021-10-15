@@ -4,7 +4,7 @@ name: linux_ppc64le_python3.7.____cpython
 
 platform:
   os: linux
-  arch: aarch64
+  arch: arm64
 
 steps:
 - name: Install and build
