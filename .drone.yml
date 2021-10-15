@@ -1,6 +1,7 @@
 ---
 kind: pipeline
 name: linux_ppc64le_python3.7.____cpython
+type: docker
 
 platform:
   os: linux
