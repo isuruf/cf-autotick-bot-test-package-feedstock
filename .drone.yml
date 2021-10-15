@@ -6,6 +6,8 @@ platform:
   os: linux
   arch: ppc64le
 
+steps:
+
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-ppc64le
   environment:
