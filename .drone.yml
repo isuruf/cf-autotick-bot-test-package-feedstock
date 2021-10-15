@@ -6,16 +6,6 @@ platform:
   os: linux
   arch: ppc64le
 
-clone:
-  disable: true
-
-steps:
-- name: clone
-  image: alpine/git
-  commands:
-  - git clone https://github.com/octocat/hello-world.git .
-  - git checkout $DRONE_COMMIT
-
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-ppc64le
   environment:
@@ -46,15 +36,7 @@ platform:
   os: linux
   arch: arm64
 
-clone:
-  disable: true
-
 steps:
-- name: clone
-  image: alpine/git
-  commands:
-  - git clone https://github.com/octocat/hello-world.git .
-  - git checkout $DRONE_COMMIT
 
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
