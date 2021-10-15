@@ -10,6 +10,12 @@ clone:
   disable: true
 
 steps:
+- name: clone
+  image: alpine/git
+  commands:
+  - git clone https://github.com/octocat/hello-world.git .
+  - git checkout $DRONE_COMMIT
+
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-ppc64le
   environment:
@@ -39,10 +45,6 @@ name: linux_aarch64_python3.8.____cpython
 platform:
   os: linux
   arch: arm64
-
-clone:
-  image: quay.io/isuruf/drone-git
-  depth: 50
 
 steps:
 - name: Install and build
