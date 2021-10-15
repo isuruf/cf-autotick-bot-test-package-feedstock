@@ -4,6 +4,6 @@ conda_forge_output_validation: true
 provider:
   linux: azure
   linux_aarch64: drone
-  linux_ppc64le: travis
-  osx: circle
+  linux_ppc64le: drone
+  osx: azure
   win: azure
