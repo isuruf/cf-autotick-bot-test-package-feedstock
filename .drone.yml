@@ -7,9 +7,8 @@ platform:
   arch: ppc64le
 
 clone:
-  git:
-    image: quay.io/isuruf/drone-git
-    depth: 50
+  image: quay.io/isuruf/drone-git
+  depth: 50
 
 steps:
 - name: Install and build
