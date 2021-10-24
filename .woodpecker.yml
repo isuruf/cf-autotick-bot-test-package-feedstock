@@ -1,4 +1,6 @@
-skip_clone: true
+clone:
+  git:
+    image: plugins/git:linux-arm64
 
 platform: linux/arm64
 
