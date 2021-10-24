@@ -1,7 +1,6 @@
 skip_clone: true
 
-labels:
-  platform: linux/arm64
+platform: linux/arm64
 
 pipeline:
   build:
