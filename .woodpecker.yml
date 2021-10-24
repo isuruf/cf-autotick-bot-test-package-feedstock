@@ -3,8 +3,6 @@ skip_clone: true
 pipeline:
   build:
     image: ${DOCKER_IMAGE}
-    when:
-      platform: linux/arm64
     commands:
       - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
       - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
