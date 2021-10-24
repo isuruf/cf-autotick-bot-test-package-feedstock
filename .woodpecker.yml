@@ -1,7 +1,9 @@
+clone:
+  git:
+    image: plugins/git:linux-arm64
+
 pipeline:
   build:
-    when:
-      platform: linux/arm64
     image: ${DOCKER_IMAGE}
     commands:
       - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
