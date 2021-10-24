@@ -1,8 +1,8 @@
 clone:
   git:
-    image: plugins/git:linux-arm64
+    image: plugins/git:${OS}-${ARCH}
 
-platform: linux/arm64
+platform: ${OS}/${ARCH}
 
 pipeline:
   build:
@@ -22,15 +22,18 @@ matrix:
   include:
     - CONFIG: linux_aarch64_python3.7.____cpython
       UPLOAD_PACKAGES: True
-      PLATFORM: linux-aarch64
+      OS: linux
+      ARCH: arm64
       DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
 
     - CONFIG: linux_aarch64_python3.8.____cpython
       UPLOAD_PACKAGES: True
-      PLATFORM: linux-aarch64
+      OS: linux
+      ARCH: arm64
       DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
 
     - CONFIG: linux_aarch64_python3.9.____cpython
       UPLOAD_PACKAGES: True
-      PLATFORM: linux-aarch64
+      OS: linux
+      ARCH: arm64
       DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
