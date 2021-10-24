@@ -6,7 +6,7 @@ pipeline:
   build:
     image: ${DOCKER_IMAGE}
     when:
-      platform: linux/amd64
+      platform: linux/arm64
     commands:
       - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
       - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
