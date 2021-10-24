@@ -1,5 +1,8 @@
 skip_clone: true
 
+labels:
+  platform: linux/arm64
+
 pipeline:
   build:
     image: ${DOCKER_IMAGE}
