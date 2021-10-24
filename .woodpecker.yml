@@ -1,6 +1,4 @@
-clone:
-  git:
-    image: plugins/git:linux-arm64
+skip_clone: true
 
 pipeline:
   build:
