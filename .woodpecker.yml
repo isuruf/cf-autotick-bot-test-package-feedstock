@@ -1,8 +1,6 @@
 clone:
   git:
     image: plugins/git:linux-arm64
-  when:
-    platform: linux/arm64
 
 pipeline:
   build:
