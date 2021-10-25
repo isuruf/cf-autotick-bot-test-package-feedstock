@@ -1,6 +1,6 @@
 clone:
   git:
-    image: quay.io/isuruf/drone-git:${OS}-${ARCH}
+    image: quay.io/condaforge/drone-git:${OS}-${ARCH}
 
 platform: ${OS}/${ARCH}
 
@@ -17,41 +17,42 @@ pipeline:
       - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
       - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
       - echo "Done building"
+    secrets: [ BINSTAR_TOKEN, FEEDSTOCK_TOKEN, STAGING_BINSTAR_TOKEN ]
 
 matrix:
   include:
     - CONFIG: linux_aarch64_python3.7.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
       UPLOAD_PACKAGES: True
       OS: linux
       ARCH: arm64
-      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
 
     - CONFIG: linux_aarch64_python3.8.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
       UPLOAD_PACKAGES: True
       OS: linux
       ARCH: arm64
-      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
 
     - CONFIG: linux_aarch64_python3.9.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
       UPLOAD_PACKAGES: True
       OS: linux
       ARCH: arm64
-      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
 
     - CONFIG: linux_ppc64le_python3.7.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
       UPLOAD_PACKAGES: True
       OS: linux
       ARCH: ppc64le
-      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
 
     - CONFIG: linux_ppc64le_python3.8.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
       UPLOAD_PACKAGES: True
       OS: linux
       ARCH: ppc64le
-      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
 
     - CONFIG: linux_ppc64le_python3.9.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
       UPLOAD_PACKAGES: True
       OS: linux
       ARCH: ppc64le
-      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
