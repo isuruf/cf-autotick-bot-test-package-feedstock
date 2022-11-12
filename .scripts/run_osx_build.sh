@@ -29,6 +29,8 @@ mamba update --update-specs --yes --quiet --channel conda-forge \
     conda-build pip boa conda-forge-ci-setup=3 "py-lief<0.12"
 
 
+conda uninstall --quiet --yes --force conda-forge-ci-setup=3 "py-lief<0.12"
+pip install --no-deps recipe/.
 
 echo -e "\n\nSetting up the condarc and mangling the compiler."
 setup_conda_rc ./ ./recipe ./.ci_support/${CONFIG}.yaml
