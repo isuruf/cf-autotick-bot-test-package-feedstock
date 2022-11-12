@@ -11,7 +11,7 @@ source:
 
 build:
   number: 2
-  skip: True  # [win or py != 39]
+  skip: True  # [py != 39]
 
 requirements:
   host:
