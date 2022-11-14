@@ -6,3 +6,6 @@ github:
   tooling_branch_name: main
 provider:
   linux_ppc64le: travis
+conda_pkg_format: 2
+azure:
+  store_build_artifacts: true
