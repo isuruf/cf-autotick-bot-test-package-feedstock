@@ -7,8 +7,6 @@ github:
 provider:
   linux_ppc64le: travis
 conda_build:
-  pkg_format: 2
+  pkg_format: '2'
 azure:
   store_build_artifacts: true
-conda_build:
-  pkg_format: '2'
