@@ -9,6 +9,7 @@ jobs:
   build:
     name: ${{ matrix.CONFIG }}
     runs-on: ${{ matrix.labels }}
+    timeout-minutes: 360
     strategy:
       fail-fast: false
       matrix:
@@ -17,7 +18,7 @@ jobs:
             UPLOAD_PACKAGES: True
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
             os: ubuntu
-            labels: ['linux', 'self-hosted', 'x64']
+            labels: ['linux', 'x64']
     steps:
 
     - name: Checkout code
