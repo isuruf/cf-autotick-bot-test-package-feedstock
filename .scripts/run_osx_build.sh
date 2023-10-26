@@ -26,10 +26,8 @@ export CONDA_SOLVER="libmamba"
 export CONDA_LIBMAMBA_SOLVER_NO_CHANNELS_FROM_INSTALLED=1
 
 mamba install --update-specs --quiet --yes --channel conda-forge --strict-channel-priority \
-    pip mamba conda-build boa conda-forge-ci-setup=4
-mamba update --update-specs --yes --quiet --channel conda-forge --strict-channel-priority \
-    pip mamba conda-build boa conda-forge-ci-setup=4
-
+    pip mamba conda-build conda-forge-ci-setup=4
+pip install git+https://github.com/mamba-org/boa
 
 
 echo -e "\n\nSetting up the condarc and mangling the compiler."
