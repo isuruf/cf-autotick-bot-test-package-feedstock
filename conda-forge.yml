@@ -5,10 +5,6 @@ github:
   branch_name: main
   tooling_branch_name: main
 conda_build_tool: "mambabuild"
-conda_install_tool: "mamba"
-conda_solver: "libmamba"
-remote_ci_setup:
-- conda-forge-ci-setup=4
 provider:
   linux_ppc64le: travis
 azure:
