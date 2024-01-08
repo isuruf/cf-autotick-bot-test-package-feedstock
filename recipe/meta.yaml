@@ -18,6 +18,7 @@ build:
     - echo jobs=1  >> .cargo/config.toml
     - {{ PYTHON }} ./build.py
   number: 0
+  skip: True  # [not linux64]
 
 requirements:
   build:
