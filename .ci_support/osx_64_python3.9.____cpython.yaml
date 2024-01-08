@@ -4,6 +4,9 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+github_actions_labels:
+- cirun-openstack-cpu-large
+- cirun-openstack-gpu-large
 macos_machine:
 - x86_64-apple-darwin13.4.0
 pin_run_as_build:
