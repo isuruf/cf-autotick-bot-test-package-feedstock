@@ -1,36 +1,62 @@
-{% set name = "cf-autotick-bot-test-package" %}
-{% set version = "0.14" %}
+{% set version = "0.8.96" %}
 
 package:
-  name: {{ name|lower }}
+  name: ensmallen_graph
   version: {{ version }}
 
 source:
-  url: https://github.com/regro/cf-autotick-bot-test-package/archive/v{{ version }}.tar.gz
-  sha256: blah
+  url: https://github.com/AnacletoLAB/ensmallen/archive/b2492e02dfdb9a7a10ca087d53b3207aadca3b9c.tar.gz
+  sha256: 044e1ac0cd53f1ec39744f7984a341e27a6c7a80850e3d23934ff2a41e8159c4
+  patches:
+    - 0001-No-zig.patch
 
 build:
+  script:
+    - cd bindings/python
+    - mkdir .cargo
+    - echo [build] >> .cargo/config.toml
+    - echo jobs=1  >> .cargo/config.toml
+    - {{ PYTHON }} ./build.py
   number: 0
-  skip: true  # [py != 39]
 
 requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('rust') }}
+    - cargo-bundle-licenses
   host:
     - python
+    - maturin
     - pip
   run:
     - python
+    - toml >=0.10.0
+    - downloaders >=1.0.15
+    - compress_json >=1.0.7
+    - userinput >=1.0.19
+    - cache_decorator >=2.1.11
+    - bioregistry >=0.5.65
+    - tqdm
+    - pandas
+    - py-cpuinfo
+    - environments_utils >=1.0.13
 
 test:
+  imports:
+    - ensmallen
   commands:
-    - echo "works!"
+    - pip check
+  requires:
+    - pip
 
 about:
-  home: https://github.com/regro/cf-scripts
-  license: BSD-3-Clause
-  license_family: BSD
+  home: https://github.com/AnacletoLAB/ensmallen
+  summary: Ensmallen is the Rust/Python high-performance graph processing submodule of the GRAPE library.
+  license: MIT
   license_file: LICENSE
-  summary: testing feedstock for the regro-cf-autotick-bot
 
 extra:
   recipe-maintainers:
-    - conda-forge-daemon
+    - isuruf
+    - dillonroach
