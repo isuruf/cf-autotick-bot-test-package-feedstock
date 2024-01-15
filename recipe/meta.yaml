@@ -16,7 +16,7 @@ build:
     - mkdir .cargo
     - echo [build] >> .cargo/config.toml
     - echo jobs=1  >> .cargo/config.toml
-    - {{ PYTHON }} ./build.py -s
+    - {{ PYTHON }} ./build.py --skip-repair
     - {{ PYTHON }} -m pip install wheels/*.whl
   number: 0
   skip: True  # [not linux64]
