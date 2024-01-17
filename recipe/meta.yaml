@@ -14,6 +14,8 @@ source:
 
 build:
   script:
+    - sed -i.bak 's/lto = "fat"/lto = "thin"/g' bindings/python/Cargo.toml
+    - sed -i.bak 's/lto = "fat"/lto = "thin"/g' graph/Cargo.toml
     - cd bindings/python
     - {{ PYTHON }} ./build.py --skip-repair
     - {{ PYTHON }} -m pip install wheels/*.whl
