@@ -4,14 +4,10 @@ conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
-provider:
-  linux_64: github_actions
 azure:
   store_build_artifacts: true
 conda_build:
   pkg_format: 2
-github_actions:
-  self_hosted: true
-  triggers:
-  - push
-  - pull_request
+azure:
+  settings_linux:
+    swapfile_size: "10GiB"
