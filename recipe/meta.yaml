@@ -34,3 +34,5 @@ about:
 extra:
   recipe-maintainers:
     - conda-forge-daemon
+  something: else
+
