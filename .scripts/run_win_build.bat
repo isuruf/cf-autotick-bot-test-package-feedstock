@@ -39,6 +39,8 @@ echo %PATH%
 where gcc.exe
 where dlltool.exe
 
+dir C:
+
 
 if !errorlevel! neq 0 exit /b !errorlevel!
 
